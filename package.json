@@ -1,0 +1,21 @@
+{
+  "name": "pmbok-summary-web",
+  "version": "1.0.0",
+  "description": "A web application that provides a summary of the PMBOK guide.",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "live-server public",
+    "build": "echo 'Build step not defined yet.'"
+  },
+  "author": "Tu Nombre",
+  "license": "MIT",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "PMBOK",
+    "project management",
+    "web application"
+  ]
+}
