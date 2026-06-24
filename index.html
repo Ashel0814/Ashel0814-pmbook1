@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Completo Guía PMBOK - Caleb Gregorio</title>
+    <style>
+        html { scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', system-ui, sans-serif; }
+        body { 
+            background: linear-gradient(135deg, #f0f7f4 0%, #e8f5f0 100%);
+            color: #2c3e50; 
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+        
+        .main-header { 
+            background: linear-gradient(135deg, #29c440 0%, #1f8f2a 50%, #157a1d 100%);
+            color: white; 
+            padding: 50px 20px; 
+            text-align: center; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .main-header h1 { 
+            font-size: 3.2rem; 
+            letter-spacing: 3px; 
+            text-transform: uppercase; 
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+        .main-header .subtitle { 
+            font-size: 1.15rem; 
+            color: #e8f5f0; 
+            margin-top: 8px;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .content-wrapper { 
+            display: flex; 
+            max-width: 1440px; 
+            margin: 40px auto; 
+            gap: 35px; 
+            padding: 0 20px; 
+            align-items: flex-start; 
+        }
+
+        .sidebar { 
+            flex: 0 0 280px; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            position: -webkit-sticky; 
+            position: sticky; 
+            top: 25px; 
+            max-height: 90vh; 
+            overflow-y: auto;
+            border-left: 5px solid #29c440;
+            transition: all 0.3s ease;
+        }
+        
+        .sidebar:hover {
+            box-shadow: 0 12px 48px rgba(41, 196, 64, 0.15);
+        }
+        
+        .sidebar h2 { 
+            font-size: 1.35rem; 
+            color: #1f3a60; 
+            margin-bottom: 20px; 
+            border-bottom: 3px solid #29c440; 
+            padding-bottom: 12px; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        .topics-menu ul { list-style: none; }
+        .topics-menu li { margin-bottom: 8px; }
+        .topics-menu li a { 
+            display: block; 
+            padding: 12px 15px; 
+            color: #5a738e; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-size: 0.95rem; 
+            font-weight: 600; 
+            transition: all 0.3s ease; 
+            border-left: 4px solid transparent;
+            background-color: transparent;
+        }
+        .topics-menu li a:hover { 
+            background: linear-gradient(90deg, rgba(41,196,64,0.1) 0%, transparent 100%);
+            color: #29c440; 
+            padding-left: 20px; 
+            border-left-color: #29c440;
+            transform: translateX(5px);
+        }
+
+        .main-content { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 35px; 
+            height: auto; 
+            overflow: visible; 
+        }
+        
+        .topic-card { 
+            background: white; 
+            padding: 40px; 
+            border-radius: 16px; 
+            box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+            scroll-margin-top: 30px; 
+            border-top: 6px solid #29c440;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -100px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(41,196,64,0.05) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        
+        .topic-card:hover {
+            box-shadow: 0 12px 48px rgba(41, 196, 64, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .topic-card h2 { 
+            color: #1f3a60; 
+            font-size: 2rem; 
+            margin-bottom: 20px; 
+            border-bottom: 2px solid #e0e9f0; 
+            padding-bottom: 15px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        
+        .topic-card p { 
+            color: #4f5f6f; 
+            margin-bottom: 18px; 
+            text-align: justify; 
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .index-box { 
+            background: linear-gradient(135deg, #f8fafc 0%, #f0f7f4 100%);
+            border: 2px solid #e0f0ea; 
+            padding: 25px; 
+            border-radius: 12px; 
+            margin: 25px 0;
+            position: relative;
+        }
+        
+        .index-box h4 { 
+            font-weight: 700; 
+            color: #1f3a60; 
+            margin-bottom: 18px; 
+            border-bottom: 2px dashed #29c440; 
+            padding-bottom: 10px;
+            font-size: 1.1rem;
+            letter-spacing: 0.3px;
+        }
+        
+        .index-box ul { list-style: none; }
+        .index-box li { 
+            font-size: 0.95rem; 
+            color: #475569; 
+            margin-bottom: 10px; 
+            position: relative; 
+            padding-left: 25px;
+            transition: all 0.2s ease;
+        }
+        
+        .index-box li:hover {
+            color: #29c440;
+            padding-left: 30px;
+        }
+        
+        .index-box li::before { 
+            content: "▹"; 
+            position: absolute; 
+            left: 5px; 
+            color: #29c440; 
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .process-flow { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); 
+            gap: 15px; 
+            margin: 25px 0;
+            align-items: stretch;
+        }
+        
+        .flow-step { 
+            background: linear-gradient(135deg, #29c440 0%, #1f8f2a 100%);
+            padding: 20px 15px; 
+            text-align: center; 
+            border-radius: 10px; 
+            font-size: 0.9rem; 
+            font-weight: 700; 
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(41, 196, 64, 0.2);
+            transition: all 0.3s ease;
+            cursor: default;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 70px;
+        }
+        
+        .flow-step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(41, 196, 64, 0.35);
+        }
+        
+        .intro-layout { 
+            display: flex; 
+            gap: 25px; 
+            align-items: flex-start; 
+        }
+        .intro-text { flex: 2; }
+        .img-wrapper { 
+            flex: 1; 
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .img-wrapper img { 
+            max-width: 100%; 
+            height: auto; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .img-wrapper a:hover img {
+            transform: scale(1.08);
+            box-shadow: 0 12px 35px rgba(41, 196, 64, 0.3);
+        }
+        
+        .main-footer { 
+            background: linear-gradient(135deg, #1a252f 0%, #2c3e50 100%);
+            color: #a0b5c7; 
+            text-align: center; 
+            padding: 35px 20px; 
+            margin-top: 60px; 
+            font-size: 0.95rem; 
+            border-top: 4px solid #29c440;
+            box-shadow: 0 -4px 15px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 992px) {
+            .main-header h1 { font-size: 2.5rem; }
+            .content-wrapper { flex-direction: column; gap: 25px; }
+            .sidebar { position: relative; top: 0; max-height: none; width: 100%; flex: none; }
+            .intro-layout { flex-direction: column; }
+            .img-wrapper { padding: 15px; }
+            .img-wrapper img { max-width: 250px; }
+            .topic-card { padding: 30px; }
+            .topic-card h2 { font-size: 1.6rem; }
+        }
+        
+        @media (max-width: 768px) {
+            .main-header {
+                padding: 35px 15px;
+            }
+            
+            .header-container {
+                gap: 20px !important;
+            }
+            
+            .main-header h1 { 
+                font-size: 2.2rem;
+            }
+            
+            .main-header .subtitle {
+                font-size: 1rem;
+            }
+            
+            .content-wrapper {
+                margin: 25px auto;
+                padding: 0 15px;
+                gap: 20px;
+            }
+            
+            .sidebar {
+                padding: 20px;
+                border-radius: 12px;
+                flex: 0 0 100%;
+            }
+            
+            .sidebar h2 {
+                font-size: 1.2rem;
+            }
+            
+            .topics-menu li a {
+                padding: 10px;
+                font-size: 0.9rem;
+            }
+            
+            .topic-card {
+                padding: 25px 20px;
+                border-radius: 12px;
+            }
+            
+            .topic-card h2 {
+                font-size: 1.5rem;
+                margin-bottom: 12px;
+            }
+            
+            .topic-card p {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+            
+            .process-flow {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 10px;
+            }
+            
+            .flow-step {
+                padding: 15px 10px;
+                min-height: 60px;
+                font-size: 0.85rem;
+            }
+            
+            .index-box {
+                padding: 18px;
+                margin: 18px 0;
+            }
+            
+            .index-box h4 {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+            
+            .index-box li {
+                font-size: 0.9rem;
+                margin-bottom: 8px;
+                padding-left: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .main-header {
+                padding: 25px 12px;
+            }
+            
+            .header-container {
+                flex-direction: column;
+                gap: 15px !important;
+            }
+            
+            .main-header h1 {
+                font-size: 1.8rem;
+                letter-spacing: 1px;
+            }
+            
+            .main-header .subtitle {
+                font-size: 0.85rem;
+                margin-top: 8px;
+            }
+            
+            .header-container img {
+                width: 70px !important;
+                height: 70px !important;
+            }
+            
+            .content-wrapper {
+                margin: 20px auto;
+                padding: 0 12px;
+                gap: 15px;
+            }
+            
+            .sidebar {
+                flex: 0 0 100%;
+                padding: 18px;
+            }
+            
+            .sidebar h2 {
+                font-size: 1.1rem;
+                margin-bottom: 15px;
+            }
+            
+            .topics-menu li a {
+                padding: 8px 10px;
+                font-size: 0.85rem;
+                border-radius: 6px;
+            }
+            
+            .main-content {
+                gap: 20px;
+            }
+            
+            .topic-card {
+                padding: 20px 15px;
+                border-radius: 10px;
+                border-top: 4px solid #29c440;
+            }
+            
+            .topic-card h2 {
+                font-size: 1.35rem;
+                margin-bottom: 12px;
+                padding-bottom: 10px;
+            }
+            
+            .topic-card p {
+                font-size: 0.95rem;
+                margin-bottom: 12px;
+                text-align: left;
+                line-height: 1.6;
+            }
+            
+            .intro-layout {
+                gap: 15px;
+            }
+            
+            .img-wrapper {
+                padding: 10px;
+            }
+            
+            .img-wrapper img {
+                max-width: 100%;
+                border-radius: 10px;
+            }
+            
+            .process-flow {
+                grid-template-columns: 1fr 1fr;
+                gap: 8px;
+                margin: 15px 0;
+            }
+            
+            .flow-step {
+                padding: 12px 8px;
+                min-height: 55px;
+                font-size: 0.8rem;
+                border-radius: 8px;
+            }
+            
+            .index-box {
+                padding: 15px;
+                margin: 15px 0;
+                border-radius: 10px;
+            }
+            
+            .index-box h4 {
+                font-size: 0.95rem;
+                margin-bottom: 10px;
+            }
+            
+            .index-box li {
+                font-size: 0.85rem;
+                margin-bottom: 6px;
+                padding-left: 18px;
+            }
+            
+            .index-box li::before {
+                font-size: 1rem;
+                left: 3px;
+            }
+            
+            .main-footer {
+                padding: 25px 15px;
+                font-size: 0.9rem;
+                margin-top: 40px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            .main-header h1 {
+                font-size: 1.5rem;
+                letter-spacing: 0.5px;
+            }
+            
+            .main-header .subtitle {
+                font-size: 0.75rem;
+            }
+            
+            .header-container img {
+                width: 60px !important;
+                height: 60px !important;
+            }
+            
+            .topic-card h2 {
+                font-size: 1.2rem;
+            }
+            
+            .process-flow {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Scrollbar styling */
+        .sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .sidebar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb {
+            background: #29c440;
+            border-radius: 10px;
+        }
+        
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: #1f8f2a;
+        }
+    </style>
+</head>
+<body>
+
+        <!-- Encabezado Principal Mejorado con Imágenes a los Lados -->
+    <header class="main-header">
+        <div class="header-container" style="display: flex; align-items: center; justify-content: center; gap: 30px; max-width: 1200px; margin: 0 auto; flex-wrap: wrap;">
+            
+            <!-- Imagen del Lado Izquierdo (Icono de Empresa/Procesos) -->
+            <img src="./images/tecnm.png" 
+                 alt="Gráficos PMBOK" 
+                 style="width: 90px; height: 90px; object-fit: cover; border-radius: 50%; border: 4px solid rgba(255,255,255,0.6); box-shadow: 0 6px 20px rgba(0,0,0,0.25); transition: all 0.3s ease;" 
+                 onmouseover="this.style.transform='scale(1.1) rotate(5deg)'; this.style.boxShadow='0 8px 30px rgba(0,0,0,0.35)';"
+                 onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.25)';">
+
+            <!-- Bloque de Texto Central -->
+            <div style="text-align: center; flex: 1; min-width: 250px;">
+                <h1 style="margin: 0; line-height: 1.2;">MANUAL PMBOK</h1>
+                <p class="subtitle" style="margin-top: 10px; margin-bottom: 0;">Guía de los Fundamentos para la Dirección de Proyectos (5ª Edición)</p>
+            </div>
+            
+            <!-- Imagen del Lado Derecho (Logotipo de la Escuela Corregido) -->
+            <img src="./images/tesh1.jpg" 
+                alt="Logotipo Escuela" 
+                style="width: 100px; height: 100px; object-fit: contain; background-color: rgba(255,255,255,0.15); padding: 8px; border-radius: 50%; border: 4px solid rgba(255,255,255,0.6); box-shadow: 0 6px 20px rgba(0,0,0,0.25); transition: all 0.3s ease;"
+                onmouseover="this.style.transform='scale(1.1) rotate(-5deg)'; this.style.boxShadow='0 8px 30px rgba(0,0,0,0.35)';"
+                onmouseout="this.style.transform='scale(1) rotate(0deg)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.25)';">
+        </div>
+    </header>
+
+
+    <div class="content-wrapper">
+        <aside class="sidebar">
+            <h2>Índice de Capítulos</h2>
+            <nav class="topics-menu">
+                <ul>
+                    <li><a href="#ch1">1. Introducción</a></li>
+                    <li><a href="#ch2">2. Entorno del Proyecto</a></li>
+                    <li><a href="#ch3">3. Procesos de Dirección</a></li>
+                    <li><a href="#ch4">4. Gestión de Integración</a></li>
+                    <li><a href="#ch5">5. Gestión del Alcance</a></li>
+                    <li><a href="#ch6">6. Gestión del Cronograma</a></li>
+                    <li><a href="#ch7">7. Gestión de los Costos</a></li>
+                    <li><a href="#ch8">8. Gestión de la Calidad</a></li>
+                    <li><a href="#ch9">9. Gestión de Recursos</a></li>
+                    <li><a href="#ch10">10. Gestión de Comunicaciones</a></li>
+                    <li><a href="#ch11">11. Gestión de Riesgos</a></li>
+                    <li><a href="#ch12">12. Gestión de Adquisiciones</a></li>
+                    <li><a href="#ch13">13. Gestión de Interesados</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+                       <!-- CAPÍTULO 1 -->
+            <section id="ch1" class="topic-card">
+                <h2>1. Introducción al Estándar</h2>
+                <div class="intro-layout">
+                    <div class="intro-text">
+                        <p>Este capítulo define las bases fundamentales de la administración de proyectos. Explica que la Guía PMBOK® proporciona pautas globales para gestionar esfuerzos temporales orientados a crear productos, servicios o resultados únicos. Establece que los proyectos se diferencian de las operaciones corrientes porque estas últimas son continuas y repetitivas.</p>
+                        <p>Se profundiza en el valor del negocio y en la jerarquía estratégica, aclarando cómo los <strong>Portafolios</strong> agrupan programas y proyectos para cumplir objetivos estratégicos corporativos, mientras que los <strong>Programas</strong> coordinan proyectos relacionados para obtener beneficios que no se lograrían de forma individual.</p>
+                    </div>
+                    <div class="img-wrapper">
+                        <a href="https://www.gob.mx/cms/uploads/attachment/file/892883/PMBOK_Quinta_edicion_espanol_copia.pdf" target="_blank" rel="noopener noreferrer" style="cursor: pointer; display: inline-block;">
+                            <img src="../src/libro.jpeg" alt="Manual Oficial PMBOK" style="transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.25)';" onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.15)';">
+                        </a>
+                    </div>
+                </div>
+
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 1 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">1.1 Propósito de la Guía del PMBOK®</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Su propósito es identificar el subconjunto de la Dirección de Proyectos que es reconocido generalmente como una buena práctica. Proporciona un léxico común para hablar de la profesión en todo el mundo.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">1.2 ¿Qué es un Proyecto?</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Un esfuerzo temporal que se lleva a cabo para crear un producto, servicio o resultado único. Que sea temporal significa que tiene un principio y un final definidos.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">1.2.1 Relaciones entre Portafolios, Programas y Proyectos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Un portafolio es un conjunto de proyectos o programas que se agrupan para alcanzar objetivos estratégicos. Un programa es un grupo de proyectos relacionados que se gestionan de forma coordinada.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">1.3 ¿Qué es la Dirección de Proyectos?</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Es la aplicación de conocimientos, habilidades, herramientas y técnicas a las actividades del proyecto para cumplir con los requisitos del mismo a través de 47 procesos lógicos.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">1.4 Relación entre Portafolios, Programas, Proyectos y OPM</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">La Dirección Organizacional de Proyectos (OPM) es un marco de ejecución estratégica que utiliza la gestión de portafolios, programas y proyectos para entregar valor al negocio de forma constante.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">1.5 Gestión de las Operaciones y Estrategia Organizacional</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Las operaciones son continuas y producen resultados repetitivos para mantener el negocio. Los proyectos transforman el negocio mediante metas temporales y únicas.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">1.6 Valor del Negocio</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Es la suma de los elementos tangibles (dinero, propiedades) e intangibles (marcas, patentes, reconocimiento público) que determinan el éxito a largo plazo de una empresa.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">1.7 Rol, Responsabilidades y Competencias del Director del Proyecto</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Es la persona asignada para liderar al equipo y lograr los objetivos. Debe cumplir con competencias de conocimiento técnico, desempeño de gestión y liderazgo efectivo.</p>
+                    </details>
+                </div>
+            </section>
+
+
+                        <!-- CAPÍTULO 2 -->
+            <section id="ch2" class="topic-card">
+                <h2>2. El Entorno en el que Operan los Proyectos</h2>
+                <p>Ningún proyecto se ejecuta en el vacío. Este capítulo describe cómo los factores externos e internos moldean, limitan o facilitan el trabajo del equipo. Divide estas fuerzas en dos grandes ramas esenciales:</p>
+                <p>Los <strong>Factores Ambientales de la Empresa (EEFs)</strong> que representan las condiciones de mercado, cultura organizacional, restricciones gubernamentales o software del sistema que el equipo no puede controlar. Por otro lado, los <strong>Activos de los Procesos de la Organización (OPAs)</strong> son los planes, plantillas, lecciones aprendidas históricas, y bases de conocimiento que la empresa pone a disposición del director para facilitarle el trabajo.</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 2 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">2.1 Influencia de la Organización en la Dirección de Proyectos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">La estructura, la cultura corporativa y el nivel de madurez en la gestión de una empresa dictan el nivel de apoyo que recibirá el proyecto y las restricciones del sistema operativo.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">2.2 Culturas y Estilos Organizacionales</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Se refiere a las normas, políticas internas, visiones compartidas y dinámicas de poder que configuran la forma en que las personas trabajan y aceptan nuevas pautas.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">2.3 Comunicación Organizacional</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">La capacidad de comunicación de una empresa depende fuertemente de su infraestructura tecnológica, redes de colaboración internas y canales formales disponibles.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">2.4 Estructuras Organizacionales</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Determinan la autoridad del Director del Proyecto. Van desde la Funcional (sin autoridad), Matricial (autoridad compartida) hasta la Proyectizada (autoridad absoluta del director).</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">2.5 Sistemas Organizacionales de Gobierno</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Los mecanismos internos que definen las reglas de negocio, los flujos de autorización, las auditorías técnicas y los criterios de éxito globales.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">2.6 Activos de los Procesos de la Organización (OPAs)</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Los planes, procesos, políticas, metodologías, formatos oficiales y la base de conocimiento histórico con lecciones aprendidas de proyectos anteriores.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">2.7 Factores Ambientales de la Empresa (EEFs)</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Condiciones que el equipo no puede controlar y que limitan el proyecto, tales como condiciones de mercado, cultura organizacional global, leyes gubernamentales y estándares industriales.</p>
+                    </details>
+                </div>
+            </section>
+
+            <!-- CAPÍTULO 3 -->
+            <section id="ch3" class="topic-card">
+                <h2>3. Procesos de la Dirección de Proyectos</h2>
+                <p>Establece la infraestructura operativa del estándar. La dirección de proyectos se consolida mediante la aplicación integrada de procesos lógicos interactivos. PMBOK organiza sus herramientas metodológicas dividiendo la vida de un proyecto en 5 macro-grupos secuenciales y concurrentes:</p>
+                
+                <div class="process-flow">
+                    <div class="flow-step">1. Inicio</div>
+                    <div class="flow-step">2. Planificación</div>
+                    <div class="flow-step">3. Ejecución</div>
+                    <div class="flow-step">4. Monitoreo y Control</div>
+                    <div class="flow-step">5. Cierre</div>
+                </div>
+
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 3 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">3.1 Interacciones Comunes entre Procesos de la Guía</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Muestra cómo la salida de un proceso (como estimar un costo) se convierte automáticamente en la entrada de otro proceso (como determinar el presupuesto de compras) de forma cíclica.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">3.2 Grupos de Procesos de la Dirección de Proyectos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">La división metodológica e integrada de los 47 procesos totales de la guía, organizados de forma lógica e independiente de las fases del ciclo de vida físico del proyecto.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">3.3 al 3.7 Desglose de los Grupos de Procesos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">El análisis técnico de las funciones operativas primarias: Inicio (autorizar), Planificación (trazar la ruta), Ejecución (hacer el trabajo), Monitoreo y Control (revisar y corregir), y Cierre (entregar el producto final).</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">3.8 Información del Proyecto</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">El modelo de maduración de datos: los Datos de Desempeño brutos se han de analizar para volverse Información útil, y finalmente se empaquetan en Informes ejecutivos listos para enviar.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">3.9 Rol de las Áreas de Conocimiento</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">El mapa o matriz general de la guía que agrupa los procesos según su especialización técnica (alcance, tiempo, costos, calidad, etc.) para facilitar su estudio sectorial.</p>
+                    </details>
+                </div>
+            </section>
+
+
+                        <!-- CAPÍTULO 4 -->
+            <section id="ch4" class="topic-card">
+                <h2>4. Gestión de la Integración del Proyecto</h2>
+                <p>Es la columna vertebral técnica de la dirección. Trata sobre las decisiones críticas que debe tomar el Director del Proyecto para unificar, coordinar y consolidar todas las actividades de las demás áreas. Incluye la creación del Acta de Constitución y el control de cambios de manera formal para evitar alteraciones descontroladas en el alcance.</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 4 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">4.1 Desarrollar el Acta de Constitución del Proyecto</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Documento oficial que autoriza formalmente la existencia de un proyecto y confiere al director la autoridad para aplicar los recursos de la organización a las actividades del mismo.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">4.2 Desarrollar el Plan para la Dirección del Proyecto</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de definir, preparar y coordinar todos los planes subsidiarios de las demás áreas e integrarlos en un plan centralizado, aprobado y coherente.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">4.3 Dirigir y Gestionar el Trabajo del Proyecto</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Liderar y ejecutar el trabajo definido en el plan de dirección del proyecto, implementando las actividades y cambios aprobados para alcanzar los objetivos.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">4.4 Monitorear y Controlar el Trabajo del Proyecto</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de dar seguimiento, revisar e informar sobre el avance general para cumplir con los objetivos de desempeño definidos por los patrocinadores.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">4.5 Realizar el Control Integrado de Cambios</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Analizar todas las solicitudes de cambio entrantes, aprobarlas o rechazarlas en el Comité de Cambios (CCB), y gestionar las modificaciones a los entregables oficiales.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">4.6 Cerrar el Proyecto o Fase</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Finalizar ordenadamente todas las actividades a través de todos los grupos de procesos de dirección para completar formalmente el proyecto o una fase específica del mismo.</p>
+                    </details>
+                </div>
+            </section>
+
+
+                        <!-- CAPÍTULO 5 -->
+            <section id="ch5" class="topic-card">
+                <h2>5. Gestión del Alcance del Proyecto</h2>
+                <p>Esta área se encarga de asegurar que el proyecto incluya única y exclusivamente todo el trabajo requerido para completar el proyecto con éxito, evitando el Scope Creep (corrupción del alcance). Su herramienta más importante es la descomposición jerárquica y el control riguroso.</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 5 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">5.1 Planificar la Gestión del Alcance</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Crear un plan documental que defina de manera clara cómo se va a definir, validar y controlar el alcance del proyecto a lo largo del ciclo de vida.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">5.2 Recopilar Requisitos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Determinar, documentar y gestionar las necesidades y expectativas de los interesados para cumplir con los objetivos técnicos finales mediante entrevistas u observaciones.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">5.3 Definir el Alcance</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Desarrollar una descripción detallada del proyecto y del producto, redactando formalmente el Enunciado del Alcance del Proyecto con los criterios de aceptación.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">5.4 Crear la EDT / WBS (Estructura de Desglose del Trabajo)</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Subdividir los entregables y el trabajo del proyecto en componentes más pequeños y fáciles de manejar, organizados jerárquicamente en paquetes de trabajo.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">5.5 Validar el Alcance</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Formalizar la aceptación técnica de los entregables del proyecto que ya han sido debidamente completados y firmados por el cliente o patrocinador mediante inspección.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">5.6 Controlar el Alcance</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Monitorear el estado del alcance del proyecto y de la línea base, gestionando los cambios reales que ocurran sobre la marcha de forma formal.</p>
+                    </details>
+                </div>
+            </section>
+
+
+                        <!-- CAPÍTULO 6 -->
+            <section id="ch6" class="topic-card">
+                <h2>6. Gestión del Cronograma del Proyecto</h2>
+                <p>Trata sobre los procesos necesarios para administrar la conclusión del proyecto a tiempo. Involucra definir las actividades individuales, secuenciarlas mediante diagramas de red, estimar los recursos requeridos y calcular la duración de cada una mediante metodologías como la Ruta Crítica.</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 6 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">6.1 Planificar la Gestión del Cronograma</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Establecer las políticas, los procedimientos y la documentación necesaria para planificar, desarrollar, gestionar, ejecutar y controlar el cronograma del proyecto.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">6.2 Definir las Actividades</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Identificar y documentar las acciones específicas que se deben realizar para generar los entregables detallados del proyecto.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">6.3 Secuenciar las Actividades</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Identificar y documentar las relaciones lógicas y dependencias de precedencia existentes entre las diferentes actividades del proyecto.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">6.4 Estimar los Recursos de las Actividades</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Estimar el tipo y las cantidades de materiales, recursos humanos, herramientas o suministros requeridos para ejecutar cada actividad.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">6.5 Estimar la Duración de las Actividades</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Estimar la cantidad de períodos de trabajo necesarios para finalizar las actividades individuales con los recursos estimados.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">6.6 Desarrollar el Cronograma</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Analizar secuencias, duraciones, requisitos y restricciones para crear el modelo del cronograma oficial del proyecto (Línea Base y Diagramas de Gantt).</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">6.7 Controlar el Cronograma</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Monitorear el estado de las actividades del proyecto para actualizar el avance del mismo y gestionar cambios a la línea base del tiempo.</p>
+                    </details>
+                </div>
+            </section>
+
+                        <!-- CAPÍTULO 7 -->
+            <section id="ch7" class="topic-card">
+                <h2>7. Gestión de los Costos del Proyecto</h2>
+                <p>Se enfoca principalmente en planificar, estimar, presupuestar y controlar los costos de modo que se complete el proyecto dentro del presupuesto aprobado, utilizando herramientas matemáticas de medición en tiempo real como el Análisis del Valor Ganado.</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 7 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">7.1 Planificar la Gestión de los Costos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Establecer las políticas, los procedimientos y la documentación necesaria para planificar, estructurar, gestionar, gastar y controlar los costos del proyecto.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">7.2 Estimar los Costos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Desarrollar una aproximación cuantitativa o estimación monetaria de los recursos financieros necesarios para completar el trabajo del proyecto.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">7.3 Determinar el Presupuesto</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Sumar los costos estimados de las actividades individuales o paquetes de trabajo para establecer una línea base de costos autorizada formalmente.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">7.4 Controlar los Costos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Monitorear la situación financiera del proyecto para actualizar el presupuesto y gestionar de manera oportuna las variaciones frente a la línea base.</p>
+                    </details>
+                </div>
+            </section>
+
+
+                        <!-- CAPÍTULO 8 -->
+            <section id="ch8" class="topic-card">
+                <h2>8. Gestión de la Calidad del Proyecto</h2>
+                <p>Determina las políticas de calidad, objetivos y responsabilidades para que el proyecto satisfaga las necesidades por las cuales fue emprendido. Implementa actividades de Aseguramiento de Calidad (procesos eficientes) y Control de Calidad (inspección de entregables finales sin errores).</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 8 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">8.1 Planificar la Gestión de la Calidad</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Identificar los requisitos y estándares de calidad para el proyecto y sus entregables, documentando cómo el proyecto demostrará el cumplimiento con los mismos.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">8.2 Realizar el Aseguramiento de la Calidad</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Auditar los requisitos de calidad y los resultados obtenidos a partir de las mediciones de control de calidad, asegurando que se utilicen estándares operativos adecuados.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">8.3 Controlar la Calidad</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Monitorear y registrar los resultados de la ejecución de las actividades de calidad, evaluando el desempeño y recomendando los cambios necesarios para corregir errores.</p>
+                    </details>
+                </div>
+            </section>
+
+                        <!-- CAPÍTULO 9 -->
+            <section id="ch9" class="topic-card">
+                <h2>9. Gestión de los Recursos Humanos del Proyecto</h2>
+                <p>Organiza, gestiona y conduce al equipo de trabajo del proyecto. Describe la evolución del equipo (Etapas de Tuckman: Formación, Turbulencia, Normalización, Desempeño y Disolución). Se enfoca en definir roles claros mediante matrices de asignación de responsabilidades conocidas como Matrices RACI.</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 9 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">9.1 Planificar la Gestión de Recursos Humanos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Identificar y documentar los roles dentro del proyecto, las responsabilidades, las habilidades requeridas y las relaciones de comunicación, creando el plan para la gestión de personal.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">9.2 Adquirir el Equipo del Proyecto</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Confirmar la disponibilidad de los recursos humanos necesarios y conseguir el equipo de trabajo requerido para completar las actividades planificadas del proyecto.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">9.3 Desarrollar el Equipo del Proyecto</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Mejorar las competencias, la interacción de los miembros del equipo y el entorno general para lograr un óptimo desempeño del proyecto y resolver problemas de dinámicas grupales.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">9.4 Dirigir al Equipo del Proyecto</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Dar seguimiento al desempeño de los miembros del equipo, proporcionar retroalimentación, resolver problemas técnicos o personales y gestionar cambios para optimizar el desempeño.</p>
+                    </details>
+                </div>
+            </section>
+
+
+                        <!-- CAPÍTULO 10 -->
+            <section id="ch10" class="topic-card">
+                <h2>10. Gestión de las Comunicaciones del Proyecto</h2>
+                <p>Asegura que la recopilación, generación, distribución, almacenamiento y disposición final de la información del proyecto sean oportunos y adecuados. El Director de Proyecto gasta aproximadamente el 90% de su tiempo comunicándose, por lo que es vital estructurar un plan que determine quién necesita qué información, cuándo la recibirá y bajo qué tecnologías.</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 10 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">10.1 Planificar la Gestión de las Comunicaciones</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de desarrollar un enfoque y un plan adecuados para las comunicaciones del proyecto sobre la base de las necesidades de información de cada interesado y de los activos organizacionales disponibles.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">10.2 Gestionar las Comunicaciones</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de garantizar que la recopilación, creación, distribución, almacenamiento, recuperación y disposición final de la información del proyecto sean oportunos, adecuados y conformes al plan corporativo.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">10.3 Controlar las Comunicaciones</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de monitorear y controlar las comunicaciones a lo largo de todo el ciclo de vida del proyecto para asegurar que se satisfagan las necesidades de información de todos los interesados técnicos y comerciales.</p>
+                    </details>
+                </div>
+            </section>
+
+
+                        <!-- CAPÍTULO 11 -->
+            <section id="ch11" class="topic-card">
+                <h2>11. Gestión de los Riesgos del Proyecto</h2>
+                <p>Trata sobre los procesos para conducir la planificación, identificación, análisis y desarrollo de respuestas ante la incertidumbre del proyecto. Los riesgos pueden ser negativos (Amenazas) o positivos (Oportunidades). Incluye metodologías para realizar el Análisis Cualitativo y Cuantitativo.</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 11 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">11.1 Planificar la Gestión de los Riesgos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Definir cómo conducir las actividades de gestión de riesgos para un proyecto, asegurando que el nivel de análisis sea proporcional a la importancia del esfuerzo.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">11.2 Identificar los Riesgos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Determinar cuáles riesgos pueden afectar al proyecto y documentar sus características en un registro inicial de riesgos del proyecto.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">11.3 Realizar el Análisis Cualitativo de Riesgos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Priorizar los riesgos para un análisis o acción posterior, evaluando y combinando la probabilidad de ocurrencia e impacto de dichos riesgos.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">11.4 Realizar el Análisis Cuantitativo de Riesgos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Analizar numéricamente el efecto de los riesgos identificados sobre los objetivos generales del proyecto mediante simulaciones matemáticas de datos.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">11.5 Planificar la Respuesta a los Riesgos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Desarrollar opciones y acciones para mejorar las oportunidades y reducir las amenazas a los objetivos del proyecto (mitigar, evitar, transferir, aceptar).</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">11.6 Controlar los Riesgos</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Implementar planes de respuesta a los riesgos, dar seguimiento a los riesgos identificados, monitorear los riesgos residuales e identificar nuevos riesgos.</p>
+                    </details>
+                </div>
+            </section>
+
+                        <!-- CAPÍTULO 12 -->
+            <section id="ch12" class="topic-card">
+                <h2>12. Gestión de las Adquisiciones del Proyecto</h2>
+                <p>Involucra la compra o adquisición de productos, servicios o resultados necesarios fuera del equipo del proyecto. Describe las relaciones contractuales legales entre Comprador y Vendedor. Se estudian los distintos tipos de contratos legales: de Precio Fijo, de Costos Reembolsables y de Tiempo y Materiales.</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 12 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">12.1 Planificar la Gestión de las Adquisiciones</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de documentar las decisiones de compra para el proyecto, especificar el enfoque e identificar a los proveedores potenciales mediante el análisis de hacer o comprar.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">12.2 Efectuar las Adquisiciones</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de obtener respuestas de los proveedores, seleccionar a un proveedor calificado y adjudicar el contrato legal de compra formal correspondiente.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">12.3 Controlar las Adquisiciones</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de gestionar las relaciones de adquisición, monitorear la ejecución de los contratos y efectuar los cambios o correcciones contractuales según sea necesario.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">12.4 Cerrar las Adquisiciones</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de finalizar cada una de las adquisiciones del proyecto, completando y liquidando de forma oficial y legal todos los contratos abiertos de la fase.</p>
+                    </details>
+                </div>
+            </section>
+
+            <!-- CAPÍTULO 13 -->
+            <section id="ch13" class="topic-card">
+                <h2>13. Gestión de los Interesados del Proyecto</h2>
+                <p>Identifica a las personas, grupos u organizaciones que pueden afectar o verse afectados por el proyecto de manera directa o indirecta. El objetivo central de este capítulo es analizar sus expectativas, niveles de interés y poder, para diseñar estrategias de gestión personalizadas que maximicen su apoyo y reduzcan su resistencia o impacto negativo a lo largo de las fases de ejecución.</p>
+                
+                <div class="index-box">
+                    <h4>Estructura Analítica Completa del Capítulo 13 (Haz clic para desplegar)</h4>
+                    
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">13.1 Identificar a los Interesados</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de identificar a las personas, grupos u organizaciones que podrían afectar o ser afectados por una decisión, actividad o resultado del proyecto, documentando información relevante relativa a sus intereses y participación.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">13.2 Planificar la Gestión de los Interesados</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de desarrollar estrategias de gestión adecuadas para lograr la participación eficaz de los interesados a lo largo del ciclo de vida del proyecto, con base en el análisis de sus necesidades, intereses e impacto en el éxito.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">13.3 Gestionar el Compromiso de los Interesados</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de comunicarse y trabajar con los interesados para satisfacer sus necesidades y expectativas, abordar los asuntos a medida que se presentan y fomentar la participación adecuada de los mismos.</p>
+                    </details>
+
+                    <details style="margin-bottom: 10px; padding: 5px; background: #fff; border-radius: 4px;">
+                        <summary style="font-weight: bold; cursor: pointer; color: #1f3a60;">13.4 Controlar el Compromiso de los Interesados</summary>
+                        <p style="margin: 5px 0 0 15px; color: #555; font-size: 0.9rem;">Proceso de monitorear las relaciones generales de los interesados del proyecto y ajustar las estrategias y los planes con el fin de involucrar a los interesados de manera eficiente.</p>
+                    </details>
+                </div>
+            </section>
+
+        </main>
+    </div>
+         
+
+
+
+    <!-- Pie de Página de la Web -->
+    <footer class="main-footer">
+        <p>&copy; 2026 Resumen Integral de la Guía PMBOK 5ª Ed. | Autor y Desarrollador: <strong>CALEB GREGORIO, ARTURO NAVARRETE</strong></p>
+    </footer>
+       
+</body>
+</html>
+
+</body>
+</html>
